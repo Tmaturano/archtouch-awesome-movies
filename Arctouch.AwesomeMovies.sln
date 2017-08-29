@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archtouch.AwesomeMovies.Android", "Archtouch.AwesomeMovies\Archtouch.AwesomeMovies.Android\Archtouch.AwesomeMovies.Android.csproj", "{10D47373-CDED-41C4-81BF-BDF2D194BB88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arctouch.AwesomeMovies.Android", "Archtouch.AwesomeMovies\Archtouch.AwesomeMovies.Android\Arctouch.AwesomeMovies.Android.csproj", "{10D47373-CDED-41C4-81BF-BDF2D194BB88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archtouch.AwesomeMovies", "Archtouch.AwesomeMovies\Archtouch.AwesomeMovies\Archtouch.AwesomeMovies.csproj", "{39A150B9-D847-4B6E-883D-2D22A0DACE40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arctouch.AwesomeMovies", "Archtouch.AwesomeMovies\Archtouch.AwesomeMovies\Arctouch.AwesomeMovies.csproj", "{39A150B9-D847-4B6E-883D-2D22A0DACE40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archtouch.AwesomeMovies.iOS", "Archtouch.AwesomeMovies\Archtouch.AwesomeMovies.iOS\Archtouch.AwesomeMovies.iOS.csproj", "{6B9D1C9C-4DE0-4A8A-A3C0-0E48C97737D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arctouch.AwesomeMovies.iOS", "Archtouch.AwesomeMovies\Archtouch.AwesomeMovies.iOS\Arctouch.AwesomeMovies.iOS.csproj", "{6B9D1C9C-4DE0-4A8A-A3C0-0E48C97737D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

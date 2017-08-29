@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace Archtouch.AwesomeMovies.iOS
+namespace Arctouch.AwesomeMovies.iOS
 {
     public class Application
     {

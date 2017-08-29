@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Archtouch.AwesomeMovies.Views
+namespace Arctouch.AwesomeMovies.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MoviesPage : ContentPage

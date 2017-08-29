@@ -149,9 +149,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Archtouch.AwesomeMovies\Archtouch.AwesomeMovies.csproj">
-      <Project>{09aabcfa-58b4-4666-b050-4b8ebcd6857d}</Project>
-      <Name>Archtouch.AwesomeMovies</Name>
+    <ProjectReference Include="..\Archtouch.AwesomeMovies\Arctouch.AwesomeMovies.csproj">
+      <Project>{39A150B9-D847-4B6E-883D-2D22A0DACE40}</Project>
+      <Name>Arctouch.AwesomeMovies</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -1,11 +1,11 @@
-﻿using Archtouch.AwesomeMovies.ViewModels;
-using Archtouch.AwesomeMovies.Views;
+﻿using Arctouch.AwesomeMovies.ViewModels;
+using Arctouch.AwesomeMovies.Views;
 using Prism.Unity;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Archtouch.AwesomeMovies
+namespace Arctouch.AwesomeMovies
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class App : PrismApplication

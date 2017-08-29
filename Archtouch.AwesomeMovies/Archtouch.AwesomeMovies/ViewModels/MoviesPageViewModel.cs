@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Archtouch.AwesomeMovies.ViewModels
+namespace Arctouch.AwesomeMovies.ViewModels
 {
     public class MoviesPageViewModel : BaseViewModel
     {

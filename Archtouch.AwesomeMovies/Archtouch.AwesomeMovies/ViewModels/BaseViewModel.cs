@@ -2,7 +2,7 @@
 using Prism.Navigation;
 using System;
 
-namespace Archtouch.AwesomeMovies.ViewModels
+namespace Arctouch.AwesomeMovies.ViewModels
 {
     public abstract class BaseViewModel : BindableBase, INavigationAware
     {
