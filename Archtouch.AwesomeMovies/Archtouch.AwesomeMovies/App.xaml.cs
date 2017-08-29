@@ -1,34 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using Archtouch.AwesomeMovies.ViewModels;
+using Archtouch.AwesomeMovies.Views;
+using Prism.Unity;
+using System;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Archtouch.AwesomeMovies
 {
-    public partial class App : Application
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class App : PrismApplication
     {
-        public App()
+        public App() { }
+
+        protected override void OnInitialized()
         {
             InitializeComponent();
 
-            MainPage = new Archtouch.AwesomeMovies.MainPage();
+            // INICIANDO NAVEGAÇÃO POR URI
+            //NavigationService.NavigateAsync(new Uri("http://www.myapp.com/MainPage", UriKind.Absolute));
+
+            // INICIANDO NAVEGAÇÃO POR STRING -- MAGIC STRINGS --
+            NavigationService.NavigateAsync("NavigationPage/MoviesPage");
         }
 
-        protected override void OnStart()
+        protected override void RegisterTypes()
         {
-            // Handle when your app starts
+            Container.RegisterTypeForNavigation<NavigationPage>();
+            Container.RegisterTypeForNavigation<MoviesPage, MoviesPageViewModel>();
+            //Container.RegisterTypeForNavigation<HomePage, HomePageViewModel>();
+            //Container.RegisterTypeForNavigation<TalkDetailsPage, TalkDetailsPageViewModel>();
+
         }
 
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
-
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
-        }
     }
 }
