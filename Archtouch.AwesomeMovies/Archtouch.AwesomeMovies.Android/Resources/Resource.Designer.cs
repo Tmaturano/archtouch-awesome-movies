@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Archtouch.AwesomeMovies.Droid.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("Arctouch.AwesomeMovies.Droid.Resource", IsApplication=true)]
 
-namespace Archtouch.AwesomeMovies.Droid
+namespace Arctouch.AwesomeMovies.Droid
 {
 	
 	
@@ -26,7 +26,7 @@ namespace Archtouch.AwesomeMovies.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Archtouch.AwesomeMovies.Droid.Resource.Attribute.actionBarSize;
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Arctouch.AwesomeMovies.Droid.Resource.Attribute.actionBarSize;
 		}
 		
 		public partial class Animation

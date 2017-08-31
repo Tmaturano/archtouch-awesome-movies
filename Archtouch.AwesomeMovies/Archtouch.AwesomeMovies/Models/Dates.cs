@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Archtouch.AwesomeMovies.Models
+namespace Arctouch.AwesomeMovies.Models
 {
     public class Dates
     {
