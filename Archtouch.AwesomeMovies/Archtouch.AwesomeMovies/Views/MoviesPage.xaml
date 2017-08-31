@@ -3,9 +3,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"                          
              x:Class="Arctouch.AwesomeMovies.Views.MoviesPage"
              Title="Upcoming Movies">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Search" Command="{Binding SearchCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Upcoming Movies!" />
+        <StackLayout Margin="10">
+            <SearchBar Text="{Binding SearchName}"
+                       SearchCommand="{Binding SearchByNameCommand}"
+                       Placeholder="Search for movies"
+                       HeightRequest="40"/>
+            <ListView x:Name="moviesList"
+                      ItemsSource="{Binding Movies}"
+                      ItemAppearing="moviesList_ItemAppearing"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None">
+                <ListView.Header>
+                    <StackLayout Padding="0,16,0,14">
+                        <Label Text="- MOVIES -" TextColor="#9c9c9e" FontSize="14" HorizontalOptions="Center" />
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="150">
+                            <Frame HasShadow="True" Margin="5">
+                                <StackLayout Orientation="Horizontal" Spacing="20">
+                                    <Image Source="{Binding PosterPath}" Aspect="AspectFill" />
+
+                                    <StackLayout>
+                                        <Label Text="{Binding Title}" 
+                                            FontAttributes="Bold" 
+                                            FontSize="Medium"/>
+                                        <Label Text="{Binding GenreNames}"
+                                            LineBreakMode="WordWrap"
+                                            FontSize="Small"/>
+                                        <Label Text="{Binding ReleaseDate}"
+                                            FontSize="Small"/>
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -33,6 +33,7 @@ namespace Arctouch.AwesomeMovies.Models
 
         [JsonProperty(PropertyName = "genre_ids")]
         public int?[] GenreIds { get; set; }
+        public string GenreNames { get; set; }
 
         [JsonProperty(PropertyName = "backdrop_path")]
         public string BackdropPath { get; set; }

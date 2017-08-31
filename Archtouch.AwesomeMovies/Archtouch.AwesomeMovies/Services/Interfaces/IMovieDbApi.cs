@@ -5,7 +5,7 @@ namespace Arctouch.AwesomeMovies.Services.Interfaces
 {
     public interface IMovieDbApi
     {
-        Task<MovieResult> GetUpcomingMovies();
+        Task<MovieResult> GetUpcomingMovies(int page);
         Task<GenreResult> GetGenres();
     }
 }

@@ -1,5 +1,8 @@
-﻿using Arctouch.AwesomeMovies.ViewModels;
+﻿using Arctouch.AwesomeMovies.Services;
+using Arctouch.AwesomeMovies.Services.Interfaces;
+using Arctouch.AwesomeMovies.ViewModels;
 using Arctouch.AwesomeMovies.Views;
+using Microsoft.Practices.Unity;
 using Prism.Unity;
 using System;
 using Xamarin.Forms;
@@ -27,6 +30,7 @@ namespace Arctouch.AwesomeMovies
         {
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MoviesPage, MoviesPageViewModel>();
+            Container.RegisterType(typeof(IMovieDbApi), typeof(MovieDbApi), null, new PerThreadLifetimeManager());
             //Container.RegisterTypeForNavigation<HomePage, HomePageViewModel>();
             //Container.RegisterTypeForNavigation<TalkDetailsPage, TalkDetailsPageViewModel>();
 

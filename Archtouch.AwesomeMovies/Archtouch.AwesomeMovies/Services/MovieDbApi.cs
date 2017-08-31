@@ -35,9 +35,9 @@ namespace Arctouch.AwesomeMovies.Services
             return null;
         }
 
-        public async Task<MovieResult> GetUpcomingMovies()
+        public async Task<MovieResult> GetUpcomingMovies(int page)
         {
-            var response = await _httpClient.GetAsync($"{Settings.BaseMovieDbUrl}movie/upcoming?api_key={Settings.MovieDbApiKey}").ConfigureAwait(false);
+            var response = await _httpClient.GetAsync($"{Settings.BaseMovieDbUrl}movie/upcoming?api_key={Settings.MovieDbApiKey}&page={page}").ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
