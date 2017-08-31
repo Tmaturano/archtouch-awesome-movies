@@ -1,6 +1,7 @@
 // Helpers/Settings.cs
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -22,5 +23,6 @@ namespace Arctouch.AwesomeMovies.Helpers
         public static string MovieDbBackdropSizeMedium => "w780";
         public static string MovieDbBackdropSizeBig => "w1280";
         public static string MovieDbBackdropSizeOriginal => "original";
+        public static TimeSpan FotoCacheDuration { get => TimeSpan.FromHours(1); }
     }
 }

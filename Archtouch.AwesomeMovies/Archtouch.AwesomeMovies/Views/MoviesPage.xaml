@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"                          
              x:Class="Arctouch.AwesomeMovies.Views.MoviesPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:local="clr-namespace:Arctouch.AwesomeMovies.Helpers"
              Title="Upcoming Movies">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Search" Command="{Binding SearchCommand}"/>
@@ -28,7 +30,14 @@
                         <ViewCell Height="150">
                             <Frame HasShadow="True" Margin="5">
                                 <StackLayout Orientation="Horizontal" Spacing="20">
-                                    <Image Source="{Binding PosterPath}" Aspect="AspectFill" />
+                                    
+                                    <ffimageloading:CachedImage x:Name="PosterImage"
+                                                                Source="{Binding PosterPath}"
+                                                                Aspect="AspectFill"
+                                                                LoadingPlaceholder="movie_db_loading_poster.png"
+                                                                ErrorPlaceholder="noimage.gif"
+                                                                CacheDuration="{Binding Source={x:Static local:Settings.FotoCacheDuration}"/>
+
 
                                     <StackLayout>
                                         <Label Text="{Binding Title}" 
