@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using Plugin.Connectivity;
+using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 
@@ -12,6 +13,17 @@ namespace Arctouch.AwesomeMovies.ViewModels
         {
             get { return _isBusy; }
             set => SetProperty(ref _isBusy, value);
+        }
+
+        public bool CheckInternetConnection()
+        {
+            if (!CrossConnectivity.IsSupported)
+                return true;
+
+            using (var connectivity = CrossConnectivity.Current)
+            {
+                return connectivity.IsConnected;
+            }
         }
 
         public BaseViewModel()

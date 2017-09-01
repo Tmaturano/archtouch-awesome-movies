@@ -82,9 +82,17 @@ namespace Arctouch.AwesomeMovies.ViewModels
         {
             try
             {
-                IsBusy = !isRefreshing;//true;
+                IsBusy = !isRefreshing;
                 IsRefreshing = isRefreshing;
-                                
+
+                if (!CheckInternetConnection())
+                {
+                    await _pageDialogService.DisplayAlertAsync("Error", "Please check if you are connected to the Internet.", "Ok");
+                    IsBusy = false;
+                    IsRefreshing = IsBusy;
+                    return;
+                }
+
                 var movies = IsSearchNameEmpty ? await _movieDbApi.GetUpcomingMovies(NextPage)
                             : await _movieDbApi.GetUpcomingMoviesByTitle(SearchName, NextPageByTitle);
 
