@@ -12,14 +12,17 @@
     <ContentPage.Content>
         <StackLayout Margin="10">
             <SearchBar Text="{Binding SearchName}"
-                       SearchCommand="{Binding SearchByNameCommand}"
+                       SearchCommand="{Binding SearchCommand}"
                        Placeholder="Search for movies"
                        HeightRequest="40"/>
             <ListView x:Name="moviesList"
                       ItemsSource="{Binding Movies}"
                       ItemAppearing="moviesList_ItemAppearing"
                       HasUnevenRows="True"
-                      SeparatorVisibility="None">
+                      SeparatorVisibility="None"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}">
                 <ListView.Header>
                     <StackLayout Padding="0,16,0,14">
                         <Label Text="- MOVIES -" TextColor="#9c9c9e" FontSize="14" HorizontalOptions="Center" />

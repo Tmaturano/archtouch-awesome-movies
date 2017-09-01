@@ -17,13 +17,14 @@ namespace Arctouch.AwesomeMovies.ViewModels
     {
         #region Properties and variables
         private readonly IMovieDbApi _movieDbApi;
-        private IPageDialogService _pageDialogService; //{ get; }
-        private INavigationService _navigationService; // { get; }
+        private IPageDialogService _pageDialogService; 
+        private INavigationService _navigationService; 
 
         private const int DefaultQuantity = 20;
         private const int DefaultPage = 1;
 
         public int NextPage { get; private set; } = 1;
+        public int NextPageByTitle { get; private set; } = 1;
 
         private string _searchName;
 
@@ -33,7 +34,18 @@ namespace Arctouch.AwesomeMovies.ViewModels
             set { _searchName = value; }
         }
 
+        private bool _isRefreshing;
+
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set => SetProperty(ref _isRefreshing, value);
+        }
+
         public ObservableCollection<Result> Movies { get; private set; }
+
+
+        private bool IsSearchNameEmpty => string.IsNullOrWhiteSpace(SearchName);
 
         #endregion
 
@@ -48,8 +60,9 @@ namespace Arctouch.AwesomeMovies.ViewModels
             _movieDbApi = movieDbApi;
 
             SearchCommand = new DelegateCommand(ExecuteSearchCommandAsync);
-            SearchByNameCommand = new DelegateCommand(ExecuteSearchByNameCommandAsync);
+            RefreshCommand = new DelegateCommand(ExecuteRefreshCommandAsync);
             Movies = new ObservableCollection<Result>();
+            IsRefreshing = false;
         }
 
         #endregion
@@ -57,31 +70,40 @@ namespace Arctouch.AwesomeMovies.ViewModels
         #region Commands
 
         public DelegateCommand SearchCommand { get; private set; }
-        public DelegateCommand SearchByNameCommand { get; private set; }
+        public DelegateCommand RefreshCommand { get; private set; }
+
 
         #endregion
 
         #region Methods
 
-        private async Task SearchMovies()
+        #region Private
+        private async Task SearchMovies(bool isRefreshing = false)
         {
             try
             {
-                IsBusy = true;
+                IsBusy = !isRefreshing;//true;
+                IsRefreshing = isRefreshing;
+                                
+                var movies = IsSearchNameEmpty ? await _movieDbApi.GetUpcomingMovies(NextPage)
+                            : await _movieDbApi.GetUpcomingMoviesByTitle(SearchName, NextPageByTitle);
 
-                var movies = await _movieDbApi.GetUpcomingMovies(NextPage);
                 var genres = await _movieDbApi.GetGenres();
 
                 if (movies == null)
                 {
                     await _pageDialogService.DisplayAlertAsync("Error", "It was not possible to search the movies, please try again.", "Ok");
                     IsBusy = false;
+                    IsRefreshing = IsBusy;
                     return;
                 }
+                
+                if (movies.TotalPages > 0 && movies.TotalPages != Settings.TotalPages)
+                    Settings.TotalPages = movies.TotalPages;
+
+                IEnumerable<string> genreNames;
 
                 //TODO:
-                //save the total_pages that come sfrom the api and store in Settings.TotalPages to check when loading more movies
-                IEnumerable<string> genreNames;
                 //Use AutoMap for this                
                 foreach (var result in movies.Results)
                 {
@@ -118,28 +140,66 @@ namespace Arctouch.AwesomeMovies.ViewModels
             }
 
             IsBusy = false;
+            IsRefreshing = IsBusy;
+        }
+
+        private bool CheckIfTotalPagesReached()
+        {
+            if (Settings.TotalPages.Equals(0))
+                return false;
+
+            if (IsSearchNameEmpty && NextPage > Settings.TotalPages)
+                return true;
+
+            if (!IsSearchNameEmpty && NextPageByTitle > Settings.TotalPages)
+                return true;
+
+            return false;                
+        }
+
+        private void InitializeAndClearMoviesList()
+        {
+            Movies.Clear();
+
+            if (IsSearchNameEmpty)
+                NextPage = 1;
+            else
+                NextPageByTitle = 1;
         }
 
         private async void ExecuteSearchCommandAsync()
         {
-            Movies.Clear();
-            NextPage = 1;
+            InitializeAndClearMoviesList();
+
             await SearchMovies();    
         }
 
-        private async void ExecuteSearchByNameCommandAsync()
+        private async void ExecuteRefreshCommandAsync()
         {
-            Movies.Clear();
-            //Call api to search by name
+            InitializeAndClearMoviesList();
+
+            await SearchMovies(isRefreshing: true);
         }
+
+        #endregion
+
+        #region Public
 
         public async Task LoadMoreMovies()
         {
-            NextPage++;
+            if (CheckIfTotalPagesReached())
+                return;
+
+            if (IsSearchNameEmpty)
+                NextPage++;
+            else
+                NextPageByTitle++;
+
             await SearchMovies();    
         }
-        
-        
+
+        #endregion
+
         #endregion
 
     }

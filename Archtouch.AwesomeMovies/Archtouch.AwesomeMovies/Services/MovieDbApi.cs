@@ -50,5 +50,21 @@ namespace Arctouch.AwesomeMovies.Services
 
             return null;
         }
+
+        public async Task<MovieResult> GetUpcomingMoviesByTitle(string searchName, int page)
+        {
+            var response = await _httpClient.GetAsync($"{Settings.BaseMovieDbUrl}search/movie?api_key={Settings.MovieDbApiKey}&query={searchName}&page={page}").ConfigureAwait(false);
+            if (response.IsSuccessStatusCode)
+            {
+                using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                {
+                    return JsonConvert.DeserializeObject<MovieResult>(
+                        await new StreamReader(responseStream)
+                            .ReadToEndAsync().ConfigureAwait(false));
+                }
+            }
+
+            return null;
+        }
     }
 }
