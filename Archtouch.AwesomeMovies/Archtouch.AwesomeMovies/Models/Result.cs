@@ -46,5 +46,7 @@ namespace Arctouch.AwesomeMovies.Models
 
         [JsonProperty(PropertyName = "release_date")]
         public string ReleaseDate { get; set; }
+
+        public string FormattedReleaseDate => $"Release date: {ReleaseDate}";
     }
 }

@@ -19,21 +19,15 @@ namespace Arctouch.AwesomeMovies
         {
             InitializeComponent();
 
-            // INICIANDO NAVEGAÇÃO POR URI
-            //NavigationService.NavigateAsync(new Uri("http://www.myapp.com/MainPage", UriKind.Absolute));
-
-            // INICIANDO NAVEGAÇÃO POR STRING -- MAGIC STRINGS --
             NavigationService.NavigateAsync("NavigationPage/MoviesPage");
         }
 
         protected override void RegisterTypes()
         {
             Container.RegisterTypeForNavigation<NavigationPage>();
-            Container.RegisterTypeForNavigation<MoviesPage, MoviesPageViewModel>();
             Container.RegisterType(typeof(IMovieDbApi), typeof(MovieDbApi), null, new PerThreadLifetimeManager());
-            //Container.RegisterTypeForNavigation<HomePage, HomePageViewModel>();
-            //Container.RegisterTypeForNavigation<TalkDetailsPage, TalkDetailsPageViewModel>();
-
+            Container.RegisterTypeForNavigation<MoviesPage, MoviesPageViewModel>();            
+            Container.RegisterTypeForNavigation<MovieDetailPage, MovieDetailPageViewModel>();
         }
 
     }

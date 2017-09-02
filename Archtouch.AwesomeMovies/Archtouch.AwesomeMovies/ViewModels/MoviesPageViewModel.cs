@@ -61,6 +61,7 @@ namespace Arctouch.AwesomeMovies.ViewModels
 
             SearchCommand = new DelegateCommand(ExecuteSearchCommandAsync);
             RefreshCommand = new DelegateCommand(ExecuteRefreshCommandAsync);
+            ItemTappedCommand = new DelegateCommand<Result>(ExecuteItemSelectedCommand);
             Movies = new ObservableCollection<Result>();
             IsRefreshing = false;
         }
@@ -71,6 +72,7 @@ namespace Arctouch.AwesomeMovies.ViewModels
 
         public DelegateCommand SearchCommand { get; private set; }
         public DelegateCommand RefreshCommand { get; private set; }
+        public DelegateCommand<Result> ItemTappedCommand { get; private set; }
 
 
         #endregion
@@ -126,7 +128,7 @@ namespace Arctouch.AwesomeMovies.ViewModels
                         Adult = result.Adult,
                         BackdropPath = $"{Settings.BaseMovieDbImageUrl}/{Settings.MovieDbBackdropSizeOriginal}/{result.BackdropPath}",
                         GenreIds = result.GenreIds,
-                        GenreNames = string.Join(", ", genreNames),
+                        GenreNames = $"Genre: {string.Join(", ", genreNames)}",
                         Id = result.Id,
                         OriginalLanguage = result.OriginalLanguage,
                         OriginalTitle = result.OriginalTitle,
@@ -187,6 +189,21 @@ namespace Arctouch.AwesomeMovies.ViewModels
             InitializeAndClearMoviesList();
 
             await SearchMovies(isRefreshing: true);
+        }
+
+        private async void ExecuteItemSelectedCommand(Result result)
+        {
+            if (result == null)
+            {
+                await _pageDialogService.DisplayAlertAsync("Erro", "Could not select the item.", "OK");
+                return;
+            }
+            var navParameter = new NavigationParameters
+            {
+                {"MovieDetail", result }
+            };
+            
+            await _navigationService.NavigateAsync("MovieDetailPage", navParameter);
         }
 
         #endregion

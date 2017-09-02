@@ -8,8 +8,8 @@
     <ProjectGuid>{39A150B9-D847-4B6E-883D-2D22A0DACE40}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Archtouch.AwesomeMovies</RootNamespace>
-    <AssemblyName>Archtouch.AwesomeMovies</AssemblyName>
+    <RootNamespace>Arctouch.AwesomeMovies</RootNamespace>
+    <AssemblyName>Arctouch.AwesomeMovies</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Models\MovieDetail.cs" />
     <Compile Include="Models\Dates.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\GenreResult.cs" />
@@ -48,7 +49,11 @@
     <Compile Include="Services\Interfaces\IMovieDbApi.cs" />
     <Compile Include="Services\MovieDbApi.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\MovieDetailPageViewModel.cs" />
     <Compile Include="ViewModels\MoviesPageViewModel.cs" />
+    <Compile Include="Views\MovieDetailPage.xaml.cs">
+      <DependentUpon>MovieDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MoviesPage.xaml.cs">
       <DependentUpon>MoviesPage.xaml</DependentUpon>
     </Compile>
@@ -121,7 +126,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MovieDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\MoviesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
