@@ -11,7 +11,7 @@ using FFImageLoading.Forms.Droid;
 
 namespace Arctouch.AwesomeMovies.Droid
 {
-    [Activity(Label = "AwesomeMovies", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "AwesomeMovies", Icon = "@drawable/fa_camera", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
