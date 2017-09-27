@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"                          
+             x:Class="Arctouch.AwesomeMovies.Views.MoviesPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:prism="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:local="clr-namespace:Arctouch.AwesomeMovies.Helpers"
+             Title="Upcoming Movies">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Search" Command="{Binding SearchCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <SearchBar Text="{Binding SearchName}"
+                       SearchCommand="{Binding SearchCommand}"
+                       Placeholder="Search for movies"
+                       HeightRequest="40"/>
+            <ListView x:Name="moviesList"
+                      ItemsSource="{Binding Movies}"
+                      ItemAppearing="moviesList_ItemAppearing"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}">
+                <ListView.Header>
+                    <StackLayout Padding="0,16,0,14">
+                        <Label Text="- MOVIES -" TextColor="#9c9c9e" FontSize="14" HorizontalOptions="Center" />
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.Behaviors>
+                    <prism:EventToCommandBehavior
+                        EventName="ItemTapped"
+                        Command="{Binding ItemTappedCommand}"
+                        EventArgsParameterPath="Item"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="150">
+                            <Frame HasShadow="True" Margin="5">
+                                <StackLayout Orientation="Horizontal" Spacing="20">
+                                    
+                                    <ffimageloading:CachedImage x:Name="PosterImage"
+                                                                Source="{Binding PosterPath}"
+                                                                Aspect="AspectFill"
+                                                                LoadingPlaceholder="movie_db_loading_poster.png"
+                                                                ErrorPlaceholder="noimage.gif"
+                                                                CacheDuration="{Binding Source={x:Static local:Settings.FotoCacheDuration}"/>
+
+
+                                    <StackLayout>
+                                        <Label Text="{Binding Title}" 
+                                            FontAttributes="Bold" 
+                                            FontSize="Medium"/>
+                                        <Label Text="{Binding GenreNames}"
+                                            LineBreakMode="WordWrap"
+                                            FontSize="Small"/>
+                                        <Label Text="{Binding FormattedReleaseDate}"
+                                            FontSize="Small"/>
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

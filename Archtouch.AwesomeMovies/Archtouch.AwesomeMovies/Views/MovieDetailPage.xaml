@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Arctouch.AwesomeMovies.Views.MovieDetailPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:local="clr-namespace:Arctouch.AwesomeMovies.Helpers"
+             Title="{Binding MovieDetail.Title}">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <ffimageloading:CachedImage x:Name="PosterImage"
+                                                    Source="{Binding MovieDetail.BackdropPath}"
+                                                    Aspect="AspectFill"
+                                                    HeightRequest="200"                                        
+                                                    HorizontalOptions="FillAndExpand"                                                
+                                                    LoadingPlaceholder="movie_db_loading_poster.png"
+                                                    ErrorPlaceholder="noimage.gif"
+                                                    CacheDuration="{Binding Source={x:Static local:Settings.FotoCacheDuration}"/>
+
+                <StackLayout Margin="20, 10, 20, 20">
+                    <Label Text="{Binding MovieDetail.Title}" 
+                                                FontAttributes="Bold" 
+                                                FontSize="Large"
+                                                LineBreakMode="WordWrap"
+                                                HorizontalTextAlignment="Center"/>
+                    <Label Text="{Binding MovieDetail.Overview}"
+                                                FontSize="Medium"
+                                                LineBreakMode="WordWrap"/>
+                    <Label Text="{Binding MovieDetail.GenreNames}"
+                                                LineBreakMode="WordWrap"
+                                                FontSize="Small"
+                                                FontAttributes="Bold"/>
+                    <Label Text="{Binding MovieDetail.FormattedReleaseDate}"
+                                                FontSize="Small"
+                                                FontAttributes="Bold"/>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+
+
+
+
+    </ContentPage.Content>
+</ContentPage>
